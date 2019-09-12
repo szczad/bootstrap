@@ -1,0 +1,76 @@
+" Vundle begin
+set nocompatible
+filetype off
+
+set rtp+=/etc/vim/bundle/Vundle.vim
+call vundle#begin('/etc/vim/bundle/')
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Shougo/denite.nvim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
+Plugin 'hashivim/vim-terraform'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'tpope/vim-commentary'
+Bundle 'edkolev/promptline.vim'
+
+call vundle#end()
+" Vundle end
+
+filetype plugin indent on
+syntax on
+colorscheme Benokai
+
+set expandtab
+set ts=2
+set shiftwidth=2
+set autoindent
+set smartindent
+set laststatus=2
+set number
+set directory=~/.vim/swap,.,~/.tmp,/var/tmp,/tmp
+set previewheight=20
+
+" Custom
+noremap <F5> :edit<CR>
+vnoremap <C-\> <Plug>Commentary
+
+" Airline w/Powerline
+let g:airline_powerline_fonts = 1
+" let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
+" let g:airline_skip_empty_sections = 1
+let  g:airline_theme = 'aurora'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" NERDTree
+map <C-N> :NERDTreeFocus<CR>
+map <C-N><C-N> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=50
+let NERDTreeShowHidden=1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" Vim Fugitive
+" Ctrl+G codes
+map <C-G>s :Gstatus<CR>
+map <C-G>a :Gwrite<CR>
+map <C-G>P :Gpush<CR>
+map <C-G>p :Gpull<CR>
+map <C-G>l :Glog<CR>
+map <C-G>d :Gvdiff<CR>
+
+" Function keys mapping
+map <F2> :Gstatus<CR>
