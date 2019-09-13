@@ -43,6 +43,72 @@ copy_dir() {
   set -e
 }
 
+make_dir() {
+  local _path="${1%/}/"
+  local _user="${2:-}"
+  local _group="${3:-}"
+  local _mode="${4:-}"
+
+  local _cmd="mkdir -p '$_path'"
+  
+  if [[ $_user != "" ]]; then
+    _cmd+="; chown '$_user' '$_path'"
+  fi
+
+  if [[ $_group != "" ]]; then
+    _cmd+="; chgrp '$_group' '$_path'"
+  fi
+
+  if [[ $_mode != "" ]]; then
+    _cmd+="; chmod '$_mode' '$_path'"
+  fi
+
+  if [[ ! $_path =~ /home/$USER/.* ]]; then
+    _cmd="sudo bash -c '$_cmd'"
+  fi
+
+  eval $_cmd
+}
+
+make_dir_new() {
+  local _mode="$1"
+  local _user="$2"
+  local _group="$3"
+  local _path="$4"
+
+  local _old_ifs="$IFS"
+  local _existing_path=""
+
+  if [ ! -e "$_path" ]; then
+    IFS=$'\n'
+
+    # Get path
+    set -- $(namei -v "$4")
+    shift 2
+
+    for line in "$@"; do
+      if [ "$(echo "$line" | cut -b 1-2)" = "d " ]; then
+        _existing_path="${_existing_path}/$(echo "$line" | cut -b 3-)"
+      fi
+    done
+
+    : ${_existing_path:=/}
+    
+    IFS="$_old_ifs"
+  else
+    if [ ! -d "$_path" ]; then
+      error "Paths \"$_path\" is not a directory"
+      exit 1
+    fi
+  fi
+
+  if [ "$(stat -c "%u" "$_existing_path")" = "$(id -u $_user)" ]; then
+    :  
+  else
+    :
+  fi
+}
+
 yes_no_check() {
   local VAL="${1,,}"
 
@@ -62,12 +128,20 @@ conditional_include() {
   fi
 }
 
+conditional_sudo() {
+  if [[ $UID -ne 0 ]]; then
+    sudo "$@"
+  else
+    "$@"
+  fi
+}
+
 rh_install() {
-  LC_ALL=C LANG=C sudo dnf install -y "$@"
+  LC_ALL=C LANG=C conditional_sudo dnf install -y "$@"
 }
 
 debian_install() {
-  DEBIAN_NONINTERACTIVE=1 apt install -y "$@"
+  LC_ALL=C LANG=C DEBIAN_NONINTERACTIVE=1 conditional_sudo apt install -y "$@"
 }
 
 if [[ "$OSTYPE" == "linux"* ]]; then

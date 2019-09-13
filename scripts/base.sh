@@ -3,7 +3,10 @@
 info "Installing essential tools"
 package_install \
   mc \
-  htop
+  htop \
+  firefox \
+  keepassxc \
+  powertop
 
 success "Base installation done!"
 
