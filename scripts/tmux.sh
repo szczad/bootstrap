@@ -5,7 +5,7 @@ LC_ALL=C LANG=C sudo dnf install -y tmux
 
 # Perparing permissions on directories
 info "Adjusting permissions"
-copy_dir "tmux/root" "/"
+copy_dir "files/tmux/root" "/"
 sudo chown root:root /etc/tmux*
 
 # Restoring SELinux labels/contextes

@@ -34,13 +34,17 @@ function file_contains() {
   return $?
 }
 
+function patch_file() {
+  sudo bash -c "cat \"$1\" >> \"$2\""
+}
+
 function copy_dir() {
-  set +e
-  DOTGLOB_LAST="$(shopt -p dotglob)"
+  # set +e
+  DOTGLOB_LAST="$(shopt -p dotglob || true)"
   shopt -s dotglob
-  sudo cp -av "files/$1"/* "$2"
+  sudo cp -av "$1"/* "${2:-/}"
   $DOTGLOB_LAST
-  set -e
+  # set -e
 }
 
 function make_dir() {
