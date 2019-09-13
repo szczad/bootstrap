@@ -22,10 +22,10 @@ unset KEY
 
 if yes_no_check "$SSHD_ENABLED"; then
   info "Enabling OpenSSH server"
-  systemctl enable --now sshd
+  sudo systemctl enable --now sshd
 else
   info "Disabling OpenSSH server"
-  systemctl disable --now sshd
+  sudo systemctl disable --now sshd
 fi
 
 success "SSH Installed and configured properly."

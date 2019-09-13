@@ -29,7 +29,7 @@ else
 
   info "Unpacking Android studio to \"$ANDROID_STUDIO_LOCATION\"."
   make_dir "$ANDROID_STUDIO_LOCATION"
-  conditional_sudo tar xaf "$ANDROID_STUDIO_TMP_FILE" -C "$ANDROID_STUDIO_LOCATION"
+  sudo tar xaf "$ANDROID_STUDIO_TMP_FILE" -C "$ANDROID_STUDIO_LOCATION"
 
   success "Installed Android Studio!"
 fi

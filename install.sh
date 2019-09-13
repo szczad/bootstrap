@@ -6,23 +6,23 @@ BASE_DIR="$(dirname "$(readlink -f "$0")")"
 GID="$(id -g $USER)"
 SCRIPTS=()
 
-info() {
+function info() {
   echo -e "\e[96m$@\e[39m" >&2
 }
 
-warn() {
+function warn() {
   echo -e "\e[93m$@\e[39m" >&2
 }
 
-success() {
+function success() {
   echo -e "\e[92m$@\e[39m" >&2
 }
 
-error() {
+function error() {
   echo -e "\e[91m$@\e[39m" >&2
 }
 
-file_contains() {
+function file_contains() {
   # SRC: https://stackoverflow.com/questions/31540902/how-to-check-if-one-file-is-part-of-other
   awk 'FNR==NR {a[FNR]=$0; next}
      FNR==1 && NR>1 {for (i in a) len++}
@@ -34,7 +34,7 @@ file_contains() {
   return $?
 }
 
-copy_dir() {
+function copy_dir() {
   set +e
   DOTGLOB_LAST="$(shopt -p dotglob)"
   shopt -s dotglob
@@ -43,7 +43,7 @@ copy_dir() {
   set -e
 }
 
-make_dir() {
+function make_dir() {
   local _path="${1%/}/"
   local _user="${2:-}"
   local _group="${3:-}"
@@ -70,7 +70,7 @@ make_dir() {
   eval $_cmd
 }
 
-make_dir_new() {
+function make_dir_new() {
   local _mode="$1"
   local _user="$2"
   local _group="$3"
@@ -109,7 +109,7 @@ make_dir_new() {
   fi
 }
 
-yes_no_check() {
+function yes_no_check() {
   local VAL="${1,,}"
 
   if [ "$VAL" = "yes" ] || [ "$VAL" = "1" ] || [ "$VAL" = "true" ]; then
@@ -119,7 +119,7 @@ yes_no_check() {
   fi
 }
 
-conditional_include() {
+function conditional_include() {
   local VAR="$1"
   shift
   local VALUE="$@"
@@ -128,20 +128,20 @@ conditional_include() {
   fi
 }
 
-conditional_sudo() {
+function sudo() {
   if [[ $UID -ne 0 ]]; then
-    sudo "$@"
+    command sudo "$@"
   else
     "$@"
   fi
 }
 
-rh_install() {
-  LC_ALL=C LANG=C conditional_sudo dnf install -y "$@"
+function rh_install() {
+  LC_ALL=C LANG=C sudo dnf install -y "$@"
 }
 
-debian_install() {
-  LC_ALL=C LANG=C DEBIAN_NONINTERACTIVE=1 conditional_sudo apt install -y "$@"
+function debian_install() {
+  LC_ALL=C LANG=C DEBIAN_NONINTERACTIVE=1 sudo apt install -y "$@"
 }
 
 if [[ "$OSTYPE" == "linux"* ]]; then
@@ -173,7 +173,7 @@ fi
 source "$BASE_DIR/install.vars"
 
 AVAILABLE_SCRIPTS=($(find scripts -type f -name \*.sh -printf "%P " | sed -e 's/\.sh//g'))
-available_scripts_help() {
+function available_scripts_help() {
   echo -e "Available scripts:\n${AVAILABLE_SCRIPTS[@]}"
   exit 0
 }
@@ -204,4 +204,5 @@ for SCRIPT in "${SCRIPTS[@]}"; do
   source "scripts/${SCRIPT}.sh"
 done
 
-info "All done!"
+success "All done!"
+
