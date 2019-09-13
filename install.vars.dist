@@ -1,0 +1,12 @@
+# "gnome", "kde" or "none"
+DESKTOP_ENV="none"
+BASHIT=1
+
+# Git
+GIT_USERNAME="First name"
+GIT_EMAIL="email"
+
+# Development stuff
+DEVELOPMENT_QT_CREATOR=0
+DEVELOPMENT_CODE_BLOCKS=0
+

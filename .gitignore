@@ -1,2 +1,6 @@
 .*.sw?
 *~
+
+# Disable embedding filled in install.vars
+install.vars
+
