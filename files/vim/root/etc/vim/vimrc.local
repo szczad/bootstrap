@@ -25,10 +25,13 @@ Bundle 'edkolev/promptline.vim'
 call vundle#end()
 " Vundle end
 
+" Standard configuration
 filetype plugin indent on
 syntax on
 colorscheme Benokai
 
+set ttymouse=xterm2
+set mouse=a
 set expandtab
 set ts=2
 set shiftwidth=2
@@ -57,8 +60,11 @@ let g:airline_symbols.space = "\ua0"
 " NERDTree
 map <C-N> :NERDTreeFocus<CR>
 map <C-N><C-N> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=50
-let NERDTreeShowHidden=1
+let g:NERDTreeWinSize=30
+let g:NERDTreeShowHidden=1
+let g:NERDTreeIgnore=['^\..*\.sw.$[[file]]', '\~$[[file]]', '^\.git$[[dir]]']
+let g:NERDTreeMouseMode=1
+let g:NERDTreeMinimalMenu=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
