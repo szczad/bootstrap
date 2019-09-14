@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # Be more strict about errors
 set -euo pipefail
@@ -176,7 +176,7 @@ fi
 # Read explicit configuration
 source "$BASE_DIR/install.vars"
 
-AVAILABLE_SCRIPTS=($(find scripts -type f -name \*.sh -printf "%P " | sed -e 's/\.sh//g'))
+AVAILABLE_SCRIPTS=($(find scripts -type f -name \*.sh -printf "%P\n" | sed -e 's/\.sh$//g'))
 function available_scripts_help() {
   echo -e "Available scripts:\n${AVAILABLE_SCRIPTS[@]}"
   exit 0
@@ -191,8 +191,10 @@ for ARG in "$@"; do
       available_scripts_help
       ;;
     *)
-      if [[ -e "$BASE_DIR/scripts/$ARG.sh" ]]; then
-        SCRIPTS+="$ARG"
+      if [[ -f "$BASE_DIR/scripts/$ARG.sh" ]]; then
+        SCRIPTS+=("$ARG")
+      elif [[ -d "$BASE_DIR/scripts/$ARG" ]]; then
+        SCRIPTS+=($(find "$BASE_DIR/scripts/$ARG" -type f ! -name .\* -printf "$ARG/%P\n" | sed -e 's/\.sh$//g'))
       else
         warn "Script \"$ARG\" does not exist"
       fi
@@ -201,7 +203,7 @@ for ARG in "$@"; do
 done
 
 if [ "${#SCRIPTS[@]}" -eq "0" ]; then
-  available_scripts_help
+  SCRIPTS=("${DEFAULT_SCRIPTS[@]}")
 fi
 
 for SCRIPT in "${SCRIPTS[@]}"; do

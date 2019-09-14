@@ -1,3 +1,4 @@
+DEFAULT_SCRIPTS=(base ssh tmux vim gpg)
 # "gnome", "kde" or "none"
 DESKTOP_ENV="none"
 BASHIT=1

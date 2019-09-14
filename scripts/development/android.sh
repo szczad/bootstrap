@@ -8,6 +8,8 @@ ANDROID_STUDIO_TMP_FILE="$(mktemp --suffix=.tar.gz)"
 : ${ANDROID_STUDIO_SHA256:=$ANDROID_STUDIO_DEFAULT_SHA256}
 : ${ANDROID_STUDIO_GLOBAL:=1}
 
+info "Installing Android Studio"
+
 if yes_no_check "$ANDROID_STUDIO_GLOBAL"; then
   ANDROID_STUDIO_LOCATION="/opt/android"
 else
