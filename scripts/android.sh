@@ -5,6 +5,7 @@ ANDROID_STUDIO_DEFAULT_SHA256="5794fd6edca6e4daa31f5ed710670d0b425534549a6c4aa2e
 ANDROID_STUDIO_TMP_FILE="$(mktemp --suffix=.tar.gz)"
 
 : ${ANDROID_STUDIO_URL:=$ANDROID_STUDIO_DEFAULT_URL}
+: ${ANDROID_STUDIO_SHA256:=$ANDROID_STUDIO_DEFAULT_SHA256}
 : ${ANDROID_STUDIO_GLOBAL:=1}
 
 if yes_no_check "$ANDROID_STUDIO_GLOBAL"; then
@@ -21,8 +22,8 @@ else
   RESULT=($(sha256sum "$ANDROID_STUDIO_TMP_FILE"))
 
   info "Checking SHA256 sum"
-  if [ "$ANDROID_STUDIO_DEFAULT_SHA256" != "${RESULT[0]}" ]; then
-    error "Invalid Android Studio IDE SHA256 sum on downloaded file:\n\t$ANDROID_STUDIO_DEFAULT_SHA256 != ${RESULT[0]}"
+  if [ "$ANDROID_STUDIO_SHA256" != "${RESULT[0]}" ]; then
+    error "Invalid Android Studio IDE SHA256 sum on downloaded file:\n\t$ANDROID_STUDIO_SHA256 != ${RESULT[0]}"
     rm -f "$ANDROID_STUDIO_TMP_FILE"
     exit 1
   fi

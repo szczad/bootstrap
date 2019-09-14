@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-if [ ! -e "$HOME/.bash_it" ]; then
+if [ "$BASHIT_GLOBAL" ]; then
+  BASHIT_LOCATION="/opt/bash_it"
+else
+  BASHIT_LOCATION="$HOME/.bash_it"
+fi
+
+if [ ! -e "$BASHIT_LOCATION" ]; then
   info "Cloning BASH IT to the user directory..."
-  git clone --depth=1 https://github.com/Bash-it/bash-it.git "$HOME/.bash_it"
-  ~/.bash_it/install.sh --silent
+  git clone --depth=1 https://github.com/Bash-it/bash-it.git "$BASHIT_LOCATION"
+  "$BASHIT_LOCATION/install.sh" --silent
 else
   info "BASH IT already cloned!"
 fi
