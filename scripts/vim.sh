@@ -1,37 +1,50 @@
 #!/usr/bin
 
+VIM_GLOBAL="${VIM_GLOBAL:-1}"
+if is_mac; then
+  VIM_GLOBAL=0
+fi
+
 # Additional variables
-VIM_DIR="${VIM_DIR:-/etc/vim}"
-BUNDLE_DIR="${VIM_BUNDLE_DIR:-$VIM_DIR/bundle}"
+is_true "$VIM_GLOBAL" && VIM_DIR="${VIM_DIR:-/etc/vim}" || VIM_DIR="${VIM_DIR:-$HOME/.vim/}"
 
 info "Installing VIM"
-package_install vim-enhanced
+dnf_install vim-enhanced
+apt_install vim-enhanced
+mac_port_install vim +python37
+mac_brew_install vim
 
-info "Adding bundles"
-if [ ! -d "$BUNDLE_DIR" ]; then
-  sudo mkdir -p /etc/vim/bundle
+if [ ! -e "$VIM_DIR/autoload/plug.vim" ]; then
+  info "Adding Vim-Plug"
+  conditional_sudo "$VIM_GLOBAL" curl -fLo "$VIM_DIR/autoload/plug.vim" --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if [ ! -e "$BUNDLE_DIR/Vundle.vim" ]; then
-  sudo git clone https://github.com/VundleVim/Vundle.vim.git /etc/vim/bundle/Vundle.vim
-fi
+info "Copying files"
+copy_dir "files/vim/root" "$VIM_DIR"
 
-# Perparing permissions on directories
-info "Adjusting permissions"
-copy_dir "files/vim/root" "/"
-sudo chown -R root:root /etc/vim*
+if is_true "$VIM_GLOBAL"; then
+  info "Adjusting permissions"
+  sudo chown -R root:root /etc/vim*
 
-info "Patching files"
-if ! file_contains "/etc/vimrc" "files/vim/vimrc.incl"; then
-  info "Patching file /etc/vimrc"
-  patch_file "files/vim/vimrc.incl" "/etc/vimrc"
+  if ! file_contains "/etc/vimrc" "files/vim/vimrc.incl"; then
+    info "Patching master config file /etc/vimrc"
+    patch_file "files/vim/vimrc.incl" "/etc/vimrc"
+  fi
 fi
 
 info "Installing VIM plugins"
-echo | echo | sudo vim +PluginInstall +qall
+if is_true "$VIM_GLOBAL"; then
+  echo | echo | sudo vim +PlugInstall +qall
 
-# Restoring SELinux labels/contextes
-info "Restoring contexts" 
-sudo restorecon -R /etc/vim*
+  # Restoring SELinux labels/contextes
+  if is_linux; then
+    info "Restoring contexts" 
+    sudo restorecon -R /etc/vim*
+  fi
+else
+  echo | echo | vim +PlugInstall +qall
+fi
 
 success "All done!"
+

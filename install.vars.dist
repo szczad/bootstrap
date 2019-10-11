@@ -3,6 +3,12 @@ DEFAULT_SCRIPTS=(base ssh tmux vim gpg)
 DESKTOP_ENV="none"
 BASHIT=1
 
+# VIM
+VIM_GLOBAL=1
+
+# Tmux
+TMUX_GLOBAL=1
+
 # Git
 GIT_USERNAME="First name"
 GIT_EMAIL="email"
