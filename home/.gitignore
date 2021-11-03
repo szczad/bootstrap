@@ -1,0 +1,14 @@
+*.sw?
+.ycm_extra_conf.py
+.venv
+.kube
+.idea
+.envrc
+.env
+.terragrunt-cache
+.terraform
+.~lock*
+.local-dev
+.dev
+vault_secret
+vars_secret.sh

@@ -1,0 +1,19 @@
+[commit]
+  gpgSign = true
+[credential]
+  helper = store
+[core]
+	excludesFile = ~/.gitignore
+[diff]
+	renames = copy
+	tool = vimdiff
+[merge]
+	renames = copy
+[cola]
+	spellcheck = false
+	blameviewer = git gui blame
+[gui]
+	historybrowser = gitk
+	editor = gvim
+[difftool]
+	prompt = true
