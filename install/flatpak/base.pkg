@@ -2,13 +2,10 @@ flathub runtime/org.freedesktop.Platform.ffmpeg-full/x86_64/20.08
 flathub runtime/org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
 
 flathub app/com.bitwarden.desktop/x86_64/stable
-flathub app/com.jetbrains.IntelliJ-IDEA-Community/x86_64/stable
+flathub app/com.github.tchx84.Flatseal/x86_64/stable
 flathub app/com.spotify.Client/x86_64/stable
-flathub app/com.visualstudio.code/x86_64/stable
 flathub app/io.atom.Atom/x86_64/stable
 flathub app/io.github.arunsivaramanneo.GPUViewer/x86_64/stable
-flathub app/org.chromium.Chromium/x86_64/stable
 flathub app/org.gimp.GIMP/x86_64/stable
 flathub app/org.inkscape.Inkscape/x86_64/stable
 flathub app/org.keepassxc.KeePassXC/x86_64/stable
-flathub app/org.mozilla.firefox/x86_64/stable
