@@ -1,0 +1,3 @@
+if command -v stern >/dev/null; then
+  source <(stern --completion bash)
+fi

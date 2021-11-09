@@ -1,5 +1,5 @@
 [submodule "home/.bash_it"]
-	path = .bash/bash-it
+	path = .bash/share/bash-it
 	url = https://github.com/Bash-it/bash-it.git
 [submodule "home/.tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
