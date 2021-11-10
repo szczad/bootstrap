@@ -48,13 +48,15 @@ set -g status-left-style bg=${THEME_BG},fg=${THEME_FG}
 set -g status-left-length 120
 set -g status-left "#[fg=${THEME_1_FG},bg=${THEME_1_BG},bold] %d-%b-%y #[fg=${THEME_1_BG},bg=${THEME_2_BG}]#[fg=${THEME_2_FG},bg=${THEME_2_BG},bold] %H:%M:%S #[fg=${THEME_2_BG},bg=${THEME_3_BG}]#[fg=${THEME_3_FG},bg=${THEME_3_BG}] #I:#P #[fg=${THEME_3_BG},bg=${THEME_BG},nobold]"
 
-set -g @online_icon "#[fg=${THEME_COLOR_OK},bold]yes"
-set -g @offline_icon "#[fg=${THEME_COLOR_BAD},bold]no "
-
+# set -g @online_icon "#[fg=${THEME_COLOR_OK},bold]yes"
+# set -g @offline_icon "#[fg=${THEME_COLOR_BAD},bold]no "
+set -g @online_icon "✔"
+set -g @offline_icon "❌ "
 # Right side of status bar
 set -g status-right-style bg=${THEME_BG},fg=${THEME_FG}
 set -g status-right-length 150
-set -g status-right "#[fg=${THEME_4_BG},bg=${THEME_BG}]#[fg=${THEME_4_FG},bg=${THEME_4_BG}] NET: #{online_status} #[fg=${THEME_3_BG},bg=${THEME_4_BG}]#[fg=${THEME_3_FG},bg=${THEME_3_BG}] BAT: #{battery_percentage} #[fg=${THEME_2_BG},bg=${THEME_3_BG}]#[fg=${THEME_2_FG},bg=${THEME_2_BG},bold] MEM: #(memory_pressure | awk 'END{ print \$NF }') #[fg=${THEME_1_BG},bg=${THEME_2_BG}]#[fg=${THEME_1_FG},bg=${THEME_1_BG},bold] CPU: #{cpu_percentage} #[]"
+# set -g status-right "#[fg=${THEME_4_BG},bg=${THEME_BG}]#[fg=${THEME_4_FG},bg=${THEME_4_BG}] NET: #{online_status} #[fg=${THEME_3_BG},bg=${THEME_4_BG}]#[fg=${THEME_3_FG},bg=${THEME_3_BG}] BAT: #{battery_percentage} #[fg=${THEME_2_BG},bg=${THEME_3_BG}]#[fg=${THEME_2_FG},bg=${THEME_2_BG},bold] MEM: #(memory_pressure | awk 'END{ print \$NF }') #[fg=${THEME_1_BG},bg=${THEME_2_BG}]#[fg=${THEME_1_FG},bg=${THEME_1_BG},bold] CPU: #{cpu_percentage} #[]"
+set -g status-right "#[fg=${THEME_4_BG},bg=${THEME_BG}]#[fg=${THEME_4_FG},bg=${THEME_4_BG}] NET: #{net_speed} #{online_status} #[fg=${THEME_3_BG},bg=${THEME_4_BG}]#[fg=${THEME_3_FG},bg=${THEME_3_BG}] BAT: #{battery_percentage} #{battery_icon} #[fg=${THEME_2_BG},bg=${THEME_3_BG}]#[fg=${THEME_2_FG},bg=${THEME_2_BG},bold] MEM: #{ram_percentage} #{ram_icon} #[fg=${THEME_1_BG},bg=${THEME_2_BG}]#[fg=${THEME_1_FG},bg=${THEME_1_BG},bold] CPU: #{cpu_percentage} #{cpu_icon} #[]"
 
 # Window status
 set -g window-status-format "  #I:#W#F  "
