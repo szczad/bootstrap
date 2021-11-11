@@ -1,0 +1,9 @@
+# Ignore everything EXCEPT for some paths.
+*
+!.bash/
+!.conf/
+!.git*
+!.tmux/
+!.tmux.conf
+!.vim/
+!.vimrc
