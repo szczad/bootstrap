@@ -1,3 +1,3 @@
-if command -v minikube >/dev/null; then
+if command_exists minikube; then
   source <(minikube completion bash)
 fi

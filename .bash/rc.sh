@@ -7,11 +7,12 @@ add_path() {
   fi
 }
 
+command_exists() {
+  command -v "$1" >/dev/null
+}
+
 add_path "$HOME/bin"
 add_path "$HOME/.local/bin"
-
-source aliases.sh
-source functions.sh
 
 for plugin in plugins/*; do
   source "$plugin"

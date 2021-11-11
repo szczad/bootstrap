@@ -1,5 +1,5 @@
 # shellcheck disable=1090
-if command -v pulumi >/dev/null; then
+if command_exists pulumi; then
   add_path "$HOME/.pulumi/bin"
 fi
 

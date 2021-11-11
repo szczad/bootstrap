@@ -1,4 +1,4 @@
 # shellcheck disable=1090
-if command -v go >/dev/null; then
+if command_exists go; then
   add_path "$HOME/.go/bin"
 fi

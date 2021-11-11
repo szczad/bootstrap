@@ -1,4 +1,4 @@
-if command -v fzf >/dev/null; then
+if command_exists fzf; then
   # FZF search replacement
-  . ../share/fzf/key-bindings.bash
+  source ../share/fzf/key-bindings.bash
 fi

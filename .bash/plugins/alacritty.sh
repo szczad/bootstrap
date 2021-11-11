@@ -1,4 +1,4 @@
-if command -v alacritty >/dev/null; then
+if command_exists alacritty; then
   alacritty_size() {
     if [[ $1 -lt 10 ]]; then
       printf "Invalid value specified: %s\n" "$1"

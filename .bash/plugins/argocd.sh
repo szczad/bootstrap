@@ -1,3 +1,3 @@
-if command -v argocd >/dev/null; then
+if command_exists argocd; then
   source <(argocd completion bash)
 fi
