@@ -3,7 +3,7 @@
 [credential]
   helper = store
 [core]
-	excludesFile = ~/.gitignore
+	excludesFile = ~/.gitignore_global
 [diff]
 	renames = copy
 	tool = vimdiff
