@@ -1,14 +1,29 @@
-" Vundle begin
+" Create necessary directories
+call system('mkdir -p $HOME/.vim/{autoload,bundle,swap,undo}')
+
+" Install Vundle if missing
+" SRC: https://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme) 
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+	let iCanHazVundle=0
+endif
+
+" Vundle requirements
 set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin('~/.vim/bundle/')
 
-Bundle 'edkolev/promptline.vim'
+" Vundle begin
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
-Plugin 'vphantom/vim-obsession'
+" Plugin 'vphantom/vim-obsession'
 Plugin 'szczad/vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -24,23 +39,31 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'tpope/vim-commentary'
 Plugin 'itspriddle/vim-shellcheck'
-Plugin 'google/vim-jsonnet'
+" Plugin 'google/vim-jsonnet'
 Plugin 'towolf/vim-helm'
 Plugin 'will133/vim-dirdiff'
 Plugin 'cespare/vim-toml'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
+Plugin 'uarun/vim-protobuf'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'ryanoasis/vim-devicons'
+Bundle 'edkolev/promptline.vim'
 
+" Install plugins on first run
+if iCanHazVundle == 0
+	echo "Installing Vundles, please ignore key map error messages"
+	echo ""
+	:PluginInstall
+endif
+" Vundle begin
 call vundle#end()
 " Vundle end
-
 
 " General options
 filetype plugin indent on
@@ -64,6 +87,8 @@ set colorcolumn=78
 set nowrap
 set completeopt=popup,longest,menuone
 colorscheme Benokai
+" Mac OS X specific settings - allow deletion using backspace and delete
+" set backspace=indent,eol,start
 
 " Leader
 let mapleader="."
@@ -151,6 +176,50 @@ let g:DirDiffWindowSize = 30
 " Custom mapping
 noremap <F5> :edit<CR>
 noremap <C-F> :Rg<CR>
+
+" SRC: https://vim.fandom.com/wiki/Improved_hex_editing
+" ex command for toggling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries 
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
 
 " Filetype mapping
 " YAML remapping
