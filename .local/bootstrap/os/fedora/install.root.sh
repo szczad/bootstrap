@@ -4,7 +4,7 @@ dnf upgrade -y
 dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 dnf groupupdate -y core
 dnf install -y rpmfusion-free-release-tainted rpmfusion-nonfree-release-tainted
-dnf debuginfo-install -y kernel xorg-x11-drv-nouveau plasma-drkonqi
+# dnf debuginfo-install -y kernel xorg-x11-drv-nouveau plasma-drkonqi
 
 dnf install -y \
   curl \
@@ -12,6 +12,7 @@ dnf install -y \
   git \
   htop \
   iptraf-ng \
+  moreutils \
   openvpn \
   tmux \
   vim-enhanced \

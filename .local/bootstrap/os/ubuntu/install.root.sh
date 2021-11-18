@@ -8,6 +8,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
   flatpak \
   htop \
   network-manager-openvpn-gnome \
+  moreutils \
   openvpn \
   tmux \
   vim-gtk
