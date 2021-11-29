@@ -48,6 +48,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
 Plugin 'uarun/vim-protobuf'
 Plugin 'SirVer/ultisnips'
+Plugin 'gcmt/taboo.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
