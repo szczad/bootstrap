@@ -5,7 +5,7 @@ source "$HOME/.bash/lib.sh"
 add_path "$HOME/bin"
 add_path "$HOME/.local/bin"
 
-for plugin in plugins/*; do
+for plugin in "$HOME/.bash/plugins"/*; do
   source "$plugin"
 done
 
