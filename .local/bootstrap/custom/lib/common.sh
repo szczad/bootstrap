@@ -15,7 +15,7 @@ install_archive() {
     code=1
   fi
 
-  rm "$tmp"
+  rm -f "$tmp"
   return $code
 }
 
