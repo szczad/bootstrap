@@ -1,4 +1,4 @@
 if command_exists fzf; then
   # FZF search replacement
-  source ../share/fzf/key-bindings.bash
+  source "$HOME/.bash/share/fzf/key-bindings.bash"
 fi
