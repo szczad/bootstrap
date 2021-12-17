@@ -40,6 +40,7 @@ dest="${HOME}/.local"
 printf 'Installing GO. OS: %s, Arch: %s, Version: %s\n' "${os,,}" "$arch" "$version"
 mkdir -p "$dest"
 if install_archive "$url" "$dest"; then
+  mv "$dest/go/bin"/* "$HOME/.local/bin"
   printf 'Installation successful! You can access Go at %s/go/bin\n' "$dest"
 else
   printf 'Installation failed!\n'
