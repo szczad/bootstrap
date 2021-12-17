@@ -1,4 +1,6 @@
 if command_exists alacritty; then
+  log_debug "Registering Alacritty terminal helpers"
+
   alacritty_size() {
     if [[ $1 -lt 10 ]]; then
       printf "Invalid value specified: %s\n" "$1"
