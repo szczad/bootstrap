@@ -35,7 +35,7 @@ case "$(uname -m)" in
     ;;
 esac
 url="https://golang.org/dl/go${version}.${os,,}-${arch}.tar.gz"
-dest="${HOME}/.local/"
+dest="${HOME}/.local"
 
 printf 'Installing GO. OS: %s, Arch: %s, Version: %s\n' "${os,,}" "$arch" "$version"
 mkdir -p "$dest"
