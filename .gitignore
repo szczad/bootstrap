@@ -1,3 +1,7 @@
 # Ignore everything EXCEPT for some paths.
 .vim/bundle/*
 .vim/swap/*
+.tmux/resurrect/*
+
+# Do not add idnored directories/files except there is .keep file
+!**/.keep
