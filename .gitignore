@@ -1,12 +1,2 @@
 # Ignore everything EXCEPT for some paths.
-/*
-!/.bash/
-!/.conf/
-!/.git*
-!/.local/
-/.local/*
-!/.local/bootstrap/
-!/.tmux/
-!/.tmux.conf
-!/.vim/
-!/.vimrc
+.vim/bundle/*
