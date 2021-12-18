@@ -1,2 +1,3 @@
 # Ignore everything EXCEPT for some paths.
 .vim/bundle/*
+.vim/swap/*
