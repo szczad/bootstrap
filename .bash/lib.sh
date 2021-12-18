@@ -1,9 +1,18 @@
-add_path() {
+prepend_path() {
   local _path="$1"
 
   if [[ -d $_path ]] && [[ $PATH != *"$_path"* ]]; then
-    log_debug "Adding \"$_path\" to PATH"
-    PATH="${PATH}:$_path"
+    log_debug "Prepending \"$_path\" to PATH"
+    PATH="${_path}:${PATH}"
+  fi
+}
+
+append_path() {
+  local _path="$1"
+
+  if [[ -d $_path ]] && [[ $PATH != *"$_path"* ]]; then
+    log_debug "Appending \"$_path\" to PATH"
+    PATH="${PATH}:${_path}"
   fi
 }
 

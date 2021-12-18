@@ -1,9 +1,12 @@
-# shellcheck disable=SC1090
+#!/usr/bin/env bash
+# shellcheck disable=1090
+
+log_debug "Setup BASH-IT"
 
 export SHELLCHECK_OPTS="-x"
 
 # Path to the bash it configuration
-export BASH_IT="$HOME/.bash/share/bash-it"
+export BASH_IT="$BOOTSTRAP_DIR/.bash/share/bash-it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.

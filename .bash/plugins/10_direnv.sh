@@ -1,4 +1,9 @@
+#!/usr/bin/env bash
+# shellcheck disable=1090
+
 if command -v direnv >/dev/null; then
+  log_debug "Setting DIRENV hook"
+
   _direnv_hook() {
     local previous_exit_status=$?;
     trap -- '' SIGINT;

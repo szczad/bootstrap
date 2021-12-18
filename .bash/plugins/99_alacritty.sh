@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=1090
+
 if command_exists alacritty; then
   log_debug "Registering Alacritty terminal helpers"
 
