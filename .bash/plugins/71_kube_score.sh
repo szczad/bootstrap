@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=1090
 
-NAME="stern"
+NAME="kube-score"
 
 enabled() {
   if is_true "${BOOTSTRAP_KUBERNETES_ENABLED:-"true"}" && is_true "${BOOTSTRAP_GO_ENABLED:-"true"}"; then
@@ -12,10 +12,6 @@ enabled() {
 }
 
 install() {
-  go install github.com/stern/stern@latest
-}
-
-run() {
-  source <(stern --completion bash)
+  go install github.com/zegl/kube-score/cmd/kube-score@latest
 }
 
