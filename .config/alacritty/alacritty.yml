@@ -1,0 +1,44 @@
+colors:
+  bright:
+    black:   '#555753'
+    blue:    '#729fcf'
+    cyan:    '#34e2e2'
+    green:   '#8ae234'
+    magenta: '#ad7fa8'
+    red:     '#ef2929'
+    white:   '#eeeeec'
+    yellow:  '#fce94f'
+  normal:
+    black:   '#101415'
+    blue:    '#3465a4'
+    cyan:    '#06989a'
+    green:   '#4e9a06'
+    magenta: '#75507b'
+    red:     '#cc0000'
+    white:   '#d3d7cf'
+    yellow:  '#c4a000'
+  # primary:
+  #   background: '#2E3436'
+
+env:
+  TERM: screen-256color
+
+font:
+  bold:
+    family: DroidSansMono Nerd Font
+    style: Bold
+  italic:
+    family: DroidSansMono Nerd Font
+    style: Italic
+  normal:
+    family: DroidSansMono Nerd Font
+    style: Medium
+  size: 13.0
+
+key_bindings:
+  - { action: ToggleFullscreen, key: F11 }
+  - { action: CreateNewWindow, key: N, mods: Control|Shift }
+
+window:
+  opacity: 0.88
+  # startup_mode: Fullscreen
